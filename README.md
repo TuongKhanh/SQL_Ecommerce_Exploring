@@ -1,36 +1,34 @@
 # SQL_Ecommerce_Exploring
 
-  1. [Introduction and Motivation](#1-introduction-and-motivation)
-  2. [The goal of creating this project](#2-the-goal-of-creating-this-project)
-  3. [Import raw data](#3-import-raw-data)
-  4. [Clear data](#4-clear-data)
-  5. [Data Processing & Exploratory Data Analysis](#5-data-processing--exploratory-data-analysis)
-  6. [Ask questions and solve it](#6-ask-questions-and-solve-it)
+  1. [Giới thiệu dự án](#1-Giới-thiệu-dự-án)
+  2. [Mục tiêu của dự án](#2-Mục-tiêu-của-dự-án)
+  3. [Nhập dữ liệu thô](#3-Nhập-dữ-liệu-thô)
+  4. [Xử lý dữ liệu & Phân tích dữ liệu thăm dò](#4-Xử-lý-dữ-liệu-&-Phân-tích-dữ-liệu-thăm-dò)
+  5. [Đặt câu hỏi và giải quyết](#5-Đặt-câu-hỏi-và-giải-quyết)
 
-## 1. Introduction and Motivation
+## 1. Giới thiệu dự án
 
-This file contains behavior data for 3 months (from 10-2019 to 12-2019) from a large multi-category online store.
+Tệp này chứa dữ liệu hành vi trong 3 tháng (từ 10-2019 đến 12-2019) từ một cửa hàng trực tuyến lớn, đa danh mục. 
 
-Each row in the file represents an event. All events are related to products and users. Each event is like many-to-many relation between products and users.
+Mỗi hàng trong tệp đại diện cho một sự kiện. Tất cả các sự kiện đều liên quan đến sản phẩm và người dùng. Mỗi sự kiện giống như mối quan hệ nhiều-nhiều giữa sản phẩm và người dùng. 
 
-Data collected by Open CDP project.
+Dữ liệu được thu thập bởi dự án Open CDP.
 
-## 2. The goal of creating this project
+## 2. Mục tiêu của dự án
 
- - Overview of activity
- - Revenue analysis
- - Transactions analysis
- - Conversion Rate Analysis
- - Customer Retention Rate Analysis
+ - Tổng quan dữ liệu
+ - Phân tích doanh thu
+ - Phân tích giao dịch
+ - Phân tích tỷ lệ chuyển đổi
+ - Phân tích tỷ lệ giữ chân khách hàng
 
-## 3. Import raw data
+## 3. Nhập dữ liệu thô
 
-The e-commerce dataset is stored in a public Kaggle dataset.
-To access the dataset, visit the following website: 
+Tập dữ liệu thương mại điện tử được lưu trữ trong tập dữ liệu Kaggle và được công khai. Để truy cập tập dữ liệu, hãy truy cập trang web sau:
 
 "https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store"
 
-## 4. Clear data
+## 4. Xử lý dữ liệu & Phân tích dữ liệu thăm dò
 
 --Làm sạch lại dữ liệu
 
@@ -93,6 +91,16 @@ To access the dataset, visit the following website:
 | 2019-12-01 03:31:50.000 | view         |      1307085 | 2053013554658800128 | electronics.audio.headphone  | lenovo     |  376.59 | 512992192 | 4d8b47d6-cb1d-40a4-84f0-7250665700d9 |
 | 2019-12-01 03:31:50.000 | purchase     |      1004856 | 2232732093077519872 | construction.tools.light     | samsung    |  124.11 | 556370026 | 4a9d9046-0f2c-4e70-a396-1f6faa3f5076 |
 
+
+	SELECT event_type FROM eCommerce_table
+ 	GROUP BY event_type
+  
+| event_type | 
+|:-----------|
+| cart       |      
+| purchase   | 
+| view       |  
+
 -- TÍNH SỐ LƯỢNG KHÁCH HÀNG TRONG TỪNG THÁNG VÀ TỈ LỆ PHẦN TRĂM VỚI QUÝ 4
 
 	WITH NUMBER_CUSTOMER_Q4 AS
@@ -116,11 +124,8 @@ To access the dataset, visit the following website:
 | 2019-11       |            176639 |          36.6516 |
 | 2019-12       |            166068 |          34.4582 |
 
-/*
- Bảng này cho só lượng thấy khách hàng vào 3 tháng 10, 11,12 và tỉ lệ khách hàng từ tháng theo quý
- Số lượng khách hàng tăng nhẹ ở tháng 11 và giảm ở tháng 12
-*/
 
+## 5. Đặt câu hỏi và giải quyết
 
 --Số lượng giao dịch trung bình trên mỗi khách hàng theo từng tháng
 
@@ -230,7 +235,7 @@ Số lượng khách hàng xem lại giảm nhưng cho vào giỏ hàng lại t�
 Doanh thu tháng 12 lại thấp hơn so với 2 tháng trước điều này cho thấy sự chuyển đổi mua hàng không cao.
 
 Doanh nghiệp cần tăng sự thu hút thiết kế và nội dung để tăng lượt xem. Sự chuyển đổi từ giỏ hàng sang mua hàng thấp, 
-cần xem xét lại dịch vụ vận chuyển hay khả năng thanh toán có gây rắc rối cho khách hàng ko? 
+cần xem xét lại dịch vụ vận chuyển hay khả năng thanh toán có gây rắc rối cho khách hàng không
 */
 
 
@@ -289,19 +294,18 @@ cần xem xét lại dịch vụ vận chuyển hay khả năng thanh toán có 
 
 | FIRST_MONTH   |   MONTH | RETAINTION_CUSTOMER   |   NEW_CUSTOMER |   RETAINED_COUNT |   RETENTION_RATE |
 |:--------------|--------:|:----------------------|---------------:|-----------------:|-----------------:|
-| 2019-10       |      10 | 2019-10               |          12774 |            12774 |           100    |
+| 2019-10       |      10 | 2019-10               |          12774 |            12774 |             100  |
 | 2019-10       |      11 | 2019-11               |          12774 |              427 |             3.34 |
 | 2019-10       |      12 | 2019-12               |          12774 |              234 |             1.83 |
-| 2019-11       |      11 | 2019-11               |          13208 |            13208 |           100    |
+| 2019-11       |      11 | 2019-11               |          13208 |            13208 |             100  |
 | 2019-11       |      12 | 2019-12               |          13208 |              304 |             2.3  |
-| 2019-12       |      12 | 2019-12               |          13697 |            13697 |           100    |
+| 2019-12       |      12 | 2019-12               |          13697 |            13697 |             100  |
 
 /*
- Số lượng khách hàng mới tăng nhẹ theo từng tháng điều này cho thấy chương trình dành 
- cho khách hàng mới có sự thu hút cao 
- Tỉ lệ khách hàng quay lại thấp cho thấy 
-   - Cần xem xét lại chất lượng sản phẩm của nhà bán hàng
-   - Đưa ra chương trình cho khách hàng thân thiết
-   - Đảm bảo khách hàng có thể dễ dàng tiếp cận hỗ trợ khi họ gặp vấn đề
-   - Thu thập phản hồi từ đánh giá của khách hàng để xem xét vấn đề ở sản phẩmm, giao hàng hay trải nghiệm = qua đó đưa ra hướng giải quyết
+ Số lượng khách hàng mới tăng nhẹ theo từng tháng điều này cho thấy chương trình dành cho khách hàng mới có sự thu hút cao
+ Tỉ lệ khách hàng quay lại thấp cho thấy .
+   - Cần xem xét lại chất lượng sản phẩm của nhà bán hàng.
+   - Đưa ra chương trình cho khách hàng thân thiết.
+   - Đảm bảo khách hàng có thể dễ dàng tiếp cận hỗ trợ khi họ gặp vấn đề.
+   - Thu thập phản hồi từ đánh giá của khách hàng để xem xét vấn đề ở sản phẩmm, giao hàng hay trải nghiệm = qua đó đưa ra hướng giải quyết.
 */
